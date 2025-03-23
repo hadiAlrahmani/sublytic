@@ -4,9 +4,11 @@
 <h2>Your Subscriptions</h2>
 <ul>
     {% for subscription in subscriptions %}
-    <li>
-        {{ subscription.name }} - Renewal: {{ subscription.renewal_date }} - ${{ subscription.price }}
-    </li>
+        <li>
+            {{ subscription.predefined_subscription.name }} - 
+            Renewal Date: {{ subscription.renewal_date }} - 
+            Auto-renew: {{ subscription.auto_renew }}
+        </li>
     {% endfor %}
 </ul>
 <a href="{% url 'logout' %}">Logout</a>

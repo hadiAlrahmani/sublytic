@@ -37,3 +37,8 @@ def create_subscription(request):
         form = SubscriptionForm()
 
     return render(request, 'subscriptions/create_subscription.html', {'form': form})
+
+@login_required
+def subscription_list(request):
+    subscriptions = Subscription.objects.filter(user=request.user)
+    return render(request, 'main_app/subscription_list.html', {'subscriptions': subscriptions})
