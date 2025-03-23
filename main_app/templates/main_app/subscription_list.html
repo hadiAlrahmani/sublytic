@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your Subscriptions</h2>
+<ul>
+    {% for subscription in subscriptions %}
+    <li>
+        {{ subscription.name }} - Renewal: {{ subscription.renewal_date }} - ${{ subscription.price }}
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'logout' %}">Logout</a>
+{% endblock %}
