@@ -4,12 +4,14 @@
 <h2>Your Subscriptions</h2>
 <ul>
     {% for subscription in subscriptions %}
-        <li>
-            {{ subscription.predefined_subscription.name }} - 
-            Renewal Date: {{ subscription.renewal_date }} - 
-            Auto-renew: {{ subscription.auto_renew }}
-        </li>
+    <li>
+        {{ subscription.predefined_subscription.name }} - {{ subscription.renewal_date }}
+        <a href="{% url 'edit_subscription' subscription.pk %}">Edit</a>
+        <a href="{% url 'delete_subscription' subscription.pk %}">Delete</a>
+    </li>
+    {% empty %}
+    <p>No subscriptions yet!</p>
     {% endfor %}
 </ul>
-<a href="{% url 'logout' %}">Logout</a>
+<a href="{% url 'create_subscription' %}">Create New Subscription</a>
 {% endblock %}
