@@ -142,5 +142,10 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
-# This will print the email to the console instead of actually sending it. You should see the email content printed when the Celery task is executed.
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io' 
+EMAIL_PORT = 587  
+EMAIL_USE_TLS = True  
+EMAIL_HOST_USER = '473631e824d474' 
+EMAIL_HOST_PASSWORD = '9b715279771cfa' 
+DEFAULT_FROM_EMAIL = 'noreply@sublytic.com'
