@@ -3,8 +3,8 @@ from .views import home, subscription_list, signup
 from django.contrib.auth import views as auth_views
 from . import views
 from django.contrib.auth.views import LoginView
-# from django.conf import settings
-# from django.conf.urls.static import static
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -18,5 +18,5 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
  
 ]
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

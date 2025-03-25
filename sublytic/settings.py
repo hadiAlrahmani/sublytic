@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -130,22 +130,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/subscriptions/'
 LOGOUT_REDIRECT_URL = '/'
 
-# # Celery settings
-# CELERY_BROKER_URL = 'redis://localhost:6379/0'
-# CELERY_ACCEPT_CONTENT = ['json']
-# CELERY_TASK_SERIALIZER = 'json'
+# Celery settings
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
-# CELERY_BEAT_SCHEDULE = {
-#     'send_subscription_reminders_daily': {
-#         'task': 'main_app.tasks.send_subscription_reminders',
-#         'schedule': 86400.0,  # Runs every 24 hours
-#     },
-# }
+CELERY_BEAT_SCHEDULE = {
+    'send_subscription_reminders_daily': {
+        'task': 'main_app.tasks.send_subscription_reminders',
+        'schedule': 86400.0,  # Runs every 24 hours
+    },
+}
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'sandbox.smtp.mailtrap.io' 
-# EMAIL_PORT = 587  
-# EMAIL_USE_TLS = True  
-# EMAIL_HOST_USER = '473631e824d474' 
-# EMAIL_HOST_PASSWORD = '9b715279771cfa' 
-# DEFAULT_FROM_EMAIL = 'noreply@sublytic.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io' 
+EMAIL_PORT = 587  
+EMAIL_USE_TLS = True  
+EMAIL_HOST_USER = '473631e824d474' 
+EMAIL_HOST_PASSWORD = '9b715279771cfa' 
+DEFAULT_FROM_EMAIL = 'noreply@sublytic.com'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
