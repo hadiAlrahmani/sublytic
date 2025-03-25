@@ -1,10 +1,77 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Create Subscription</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create Subscription</button>
-  </form>
+  <h2>Select Your Subscription</h2>
+  <div class="row">
+    {% for subscription in predefined_subscriptions %}
+      <div class="col-md-4">
+        <div class="card">
+          {% if subscription.image %}
+            <img src="{{ subscription.image.url }}" class="card-img-top" alt="{{ subscription.name }}">
+          {% else %}
+            <img src="/static/default_image.png" class="card-img-top" alt="Default Image">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ subscription.name }}</h5>
+            <p class="card-text">{{ subscription.description }}</p>
+            <p class="card-text">Price: {{ subscription.price }} USD</p>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#selectSubscriptionModal" 
+                    data-id="{{ subscription.id }}" 
+                    data-name="{{ subscription.name }}" 
+                    data-price="{{ subscription.price }}">
+              Select
+            </button>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Modal for selecting the subscription -->
+  <div class="modal fade" id="selectSubscriptionModal" tabindex="-1" aria-labelledby="selectSubscriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="selectSubscriptionModalLabel">Choose Subscription Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{% url 'create_subscription' %}">
+            {% csrf_token %}
+            <input type="hidden" name="predefined_subscription" id="predefined_subscription">
+            <div class="mb-3">
+              <label for="renewal_date" class="form-label">Renewal Date</label>
+              <input type="date" class="form-control" id="renewal_date" name="renewal_date" required>
+            </div>
+            <div class="mb-3">
+              <label for="auto_renew" class="form-label">Auto Renew</label>
+              <input type="checkbox" class="form-check-input" id="auto_renew" name="auto_renew" checked>
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input type="text" class="form-control" id="price" name="price" value="" readonly>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Subscription</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    // Handle the modal button click to set the subscription details
+    const selectButtons = document.querySelectorAll('.btn[data-bs-toggle="modal"]');
+    selectButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const subscriptionId = this.getAttribute('data-id');
+        const subscriptionName = this.getAttribute('data-name');
+        const subscriptionPrice = this.getAttribute('data-price');
+
+        document.getElementById('predefined_subscription').value = subscriptionId;
+        document.getElementById('price').value = subscriptionPrice;
+      });
+    });
+  </script>
 {% endblock %}

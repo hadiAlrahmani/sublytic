@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Past Subscription Payments</h2>
+  <ul>
+    {% for payment in payments %}
+      <li>
+        {{ payment.subscription.predefined_subscription.name }} - Amount: {{ payment.amount }} - Date: {{ payment.date }}
+      </li>
+    {% empty %}
+      <p>No payment history available.</p>
+    {% endfor %}
+  </ul>
+{% endblock %}

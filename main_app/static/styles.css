@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav form {
+    display: inline;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.renewal-reminder {
+    color: red;
+    font-weight: bold;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    max-width: 100px;
+    border-radius: 8px;
+}
+
+.card-body {
+    padding: 10px;
+}
+
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1em;
+    color: #555;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-footer .renewal-reminder {
+    font-size: 0.9em;
+    color: red;
+}
+
+.card-footer .edit-delete {
+    display: flex;
+    gap: 10px;
+}
+
+.card-footer a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.card-footer a:hover {
+    text-decoration: underline;
+}

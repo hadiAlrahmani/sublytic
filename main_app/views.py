@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .models import Subscription, PredefinedSubscription
-from .forms import SignUpForm
-from .forms import SubscriptionForm
+from .models import Subscription, SubscriptionPayment, PredefinedSubscription  # Added PredefinedSubscription import
+from .forms import SignUpForm, SubscriptionForm
+from django.utils import timezone
 
 def home(request):
     return render(request, 'main_app/home.html')
@@ -23,29 +23,43 @@ def signup(request):
 @login_required 
 def create_subscription(request):
     if request.method == 'POST':
-        form = SubscriptionForm(request.POST)
-        if form.is_valid():
-            subscription = form.save(commit=False)  # Do not save yet
-            subscription.user = request.user
-            subscription.save()  # Now save it
-            return redirect('subscription_list')
-    else:
-        form = SubscriptionForm()
-    return render(request, 'subscriptions/create_subscription.html', {'form': form})
+        # Handle the form submission to create a subscription
+        predefined_subscription_id = request.POST.get('predefined_subscription')
+        predefined_subscription = PredefinedSubscription.objects.get(id=predefined_subscription_id)
+        
+        renewal_date = request.POST.get('renewal_date')
+        auto_renew = request.POST.get('auto_renew') == 'on'
+        price = predefined_subscription.price  # Use predefined subscription's price
 
-# Edit Subscription View
-def edit_subscription(request, pk):
-    subscription = get_object_or_404(Subscription, pk=pk)
-    if request.method == 'POST':
-        form = SubscriptionForm(request.POST, instance=subscription)
-        if form.is_valid():
-            form.save()
+        subscription = Subscription.objects.create(
+            user=request.user,
+            predefined_subscription=predefined_subscription,
+            renewal_date=renewal_date,
+            auto_renew=auto_renew,
+            price=price
+        )
         return redirect('subscription_list')
     else:
+        # Display the predefined subscriptions on GET
+        predefined_subscriptions = PredefinedSubscription.objects.all()
+        return render(request, 'main_app/subscriptions/create_subscription.html', {'predefined_subscriptions': predefined_subscriptions})
+
+# Edit Subscription View
+@login_required
+def edit_subscription(request, pk):
+    subscription = Subscription.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = SubscriptionForm(request.POST, request.FILES, instance=subscription)
+        if form.is_valid():
+            form.save()
+            return redirect('subscription_list')
+    else:
         form = SubscriptionForm(instance=subscription)
-        return render(request, 'main_app/subscriptions/edit_subscription.html', {'form': form, 'subscription': subscription})
-    
+
+    return render(request, 'main_app/subscriptions/edit_subscription.html', {'form': form})
+
 # Delete Subscription View
+@login_required
 def delete_subscription(request, pk):
     subscription = get_object_or_404(Subscription, pk=pk)
     if request.method == 'POST':
@@ -54,6 +68,16 @@ def delete_subscription(request, pk):
     return render(request, 'main_app/subscriptions/delete_subscription.html', {'subscription': subscription})
 
 # View all subscriptions for the user
+@login_required
 def subscription_list(request):
     subscriptions = Subscription.objects.filter(user=request.user)
-    return render(request, 'main_app/subscription_list.html', {'subscriptions': subscriptions})
+    today = timezone.now().date()  # Get today's date
+    return render(request, 'main_app/subscription_list.html', {'subscriptions': subscriptions, 'today': today})
+
+# View subscription payment history
+@login_required
+def subscription_history(request):
+    payments = SubscriptionPayment.objects.filter(user=request.user).order_by('-date')
+    return render(request, 'main_app/subscription_history.html', {
+        'payments': payments
+    })
