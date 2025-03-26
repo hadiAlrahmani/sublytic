@@ -82,3 +82,26 @@ h1, h2 {
 .card-footer a:hover {
     text-decoration: underline;
 }
+
+.subscription-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.subscription-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subscription-card.border-primary {
+  border: 2px solid #007bff; /* Highlight border */
+}
+
+#selected-subscription-info h5 {
+  font-weight: bold;
+  color: #007bff;
+}
+
+#selected-subscription-info p {
+  font-size: 1.2em;
+  font-weight: bold;
+}
