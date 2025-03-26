@@ -14,7 +14,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ subscription.name }}</h5>
             <p class="card-text">{{ subscription.description }}</p>
-            <p class="card-text">Price: ${{ subscription.price }}</p>
+            <p class="card-text">Price: {{ subscription.price }} BHD</p>
             <button class="btn btn-primary select-subscription" data-id="{{ subscription.id }}" 
                     data-name="{{ subscription.name }}" data-price="{{ subscription.price }}" 
                     data-description="{{ subscription.description }}">
@@ -82,7 +82,7 @@
           
           // Update modal content with selected subscription details
           document.getElementById('selected_subscription_name').textContent = subscriptionName;
-          document.getElementById('subscription_price').textContent = `$${subscriptionPrice}`;
+          document.getElementById('subscription_price').textContent = `${subscriptionPrice} BHD`;
           document.getElementById('predefined_subscription').value = subscriptionId;
           
           // Show the modal
