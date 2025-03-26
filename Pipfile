@@ -4,12 +4,20 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
 whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
+celery = "*"
+redis = "*"
+django-celery-beat = "*"
+django = "*"
+psycopg2 = "*"
+pillow = "*"
+django-crispy-forms = "*"
+django-environ = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 
