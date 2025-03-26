@@ -11,7 +11,7 @@ class SignUpForm(UserCreationForm):
 class SubscriptionForm(forms.ModelForm):
     predefined_subscription = forms.ModelChoiceField(queryset=PredefinedSubscription.objects.all(), empty_label="Choose Subscription")
     renewal_date = forms.DateField(widget=forms.SelectDateWidget())
-    auto_renew = forms.BooleanField(initial=True)
+    auto_renew = forms.BooleanField(required=False, initial=True)
 
     class Meta:
         model = Subscription

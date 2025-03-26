@@ -14,7 +14,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ subscription.predefined_subscription.name }}</h5>
             <p class="card-text">Renewal Date: {{ subscription.renewal_date }}</p>
-            {% if subscription.renewal_date <= today %}
+            {% if subscription.renewal_date <= today|add:"7 days" %}
               <p class="renewal-reminder">Renewal Reminder!</p>
             {% endif %}
           </div>
