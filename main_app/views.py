@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Subscription, SubscriptionPayment, PredefinedSubscription  # Added PredefinedSubscription import
 from .forms import SignUpForm, SubscriptionForm
 from django.utils import timezone
+import datetime
 
 def home(request):
     return render(request, 'main_app/home.html')
@@ -75,9 +76,26 @@ def delete_subscription(request, pk):
 # View all subscriptions for the user
 @login_required
 def subscription_list(request):
+    test_date = request.GET.get('test_date')
+
+    if test_date:
+        try:
+            today = timezone.datetime.strptime(test_date, "%Y-%m-%d").date()
+        except ValueError:
+            today = timezone.now().date()
+    else:
+        today = timezone.now().date()
+
+    reminder_start_date = today  # Reminder starts today
+    reminder_end_date = today + timezone.timedelta(days=7)  # Ends in 7 days
+
     subscriptions = Subscription.objects.filter(user=request.user)
-    today = timezone.now().date()  # Get today's date
-    return render(request, 'main_app/subscription_list.html', {'subscriptions': subscriptions, 'today': today})
+    return render(request, 'main_app/subscription_list.html', {
+        'subscriptions': subscriptions,
+        'today': today,
+        'reminder_start_date': reminder_start_date,
+        'reminder_end_date': reminder_end_date
+    })
 
 # View subscription payment history
 @login_required
