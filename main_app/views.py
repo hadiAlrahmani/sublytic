@@ -21,7 +21,7 @@ def home(request):
             renewal_date__lte=reminder_end_date
         ).order_by('renewal_date')
     else:
-        upcoming_renewals = []
+        upcoming_renewals = None  # Set to None if the user is not logged in
 
     return render(request, 'main_app/home.html', {
         'upcoming_renewals': upcoming_renewals,  # Pass upcoming renewals to the template

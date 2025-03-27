@@ -17,31 +17,33 @@
         </div>
     </div>
 
-    <!-- Upcoming Renewals Section -->
-    <div class="upcoming-renewals">
-        <h2>Upcoming Renewals</h2>
-        {% if upcoming_renewals %}
-            <div class="renewal-cards">
-                {% for subscription in upcoming_renewals %}
-                    <div class="renewal-card">
-                        <div class="card-content">
-                            <h5 class="subscription-title">{{ subscription.predefined_subscription.name }}</h5>
-                            <p class="renewal-date">Renewal Date: {{ subscription.renewal_date }}</p>
-                            {% if reminder_start_date <= subscription.renewal_date <= reminder_end_date %}
-                                <p class="renewal-reminder">Renewal Reminder!</p>
-                            {% endif %}
+    <!-- Upcoming Renewals Section (only visible to logged-in users) -->
+    {% if user.is_authenticated %}
+        <div class="upcoming-renewals">
+            <h2>Upcoming Renewals</h2>
+            {% if upcoming_renewals %}
+                <div class="renewal-cards">
+                    {% for subscription in upcoming_renewals %}
+                        <div class="renewal-card">
+                            <div class="card-content">
+                                <h5 class="subscription-title">{{ subscription.predefined_subscription.name }}</h5>
+                                <p class="renewal-date">Renewal Date: {{ subscription.renewal_date }}</p>
+                                {% if reminder_start_date <= subscription.renewal_date <= reminder_end_date %}
+                                    <p class="renewal-reminder">Renewal Reminder!</p>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer">
+                                <p class="price">{{ subscription.predefined_subscription.price }} BHD</p>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <p class="price">{{ subscription.predefined_subscription.price }} BHD</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="no-renewals">
-                <p>You have no upcoming renewals at the moment.</p>
-            </div>
-        {% endif %}
-    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-renewals">
+                    <p>You have no upcoming renewals at the moment.</p>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
