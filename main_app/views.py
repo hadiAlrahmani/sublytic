@@ -5,6 +5,7 @@ from .models import Subscription, SubscriptionPayment, PredefinedSubscription  #
 from .forms import SignUpForm, SubscriptionForm
 from django.utils import timezone
 import datetime
+from django.core.mail import send_mail
 
 def home(request):
     # Get today's date and calculate the reminder range
@@ -125,3 +126,4 @@ def subscription_history(request):
     return render(request, 'main_app/subscription_history.html', {
         'payments': payments
     })
+

@@ -15,6 +15,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
+from celery.schedules import crontab
+from datetime import timedelta
+
 import dj_database_url
 
 load_dotenv()
@@ -168,10 +171,12 @@ CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
+
+
 CELERY_BEAT_SCHEDULE = {
-    'send_subscription_reminders_daily': {
-        'task': 'main_app.tasks.send_subscription_reminders',
-        'schedule': 86400.0,  # Runs every 24 hours
+    'send-renewal-reminders-every-30-seconds': {
+        'task': 'main_app.tasks.send_subscription_renewal_reminders_task',
+        'schedule': timedelta(seconds=30),  # This runs every 30 seconds
     },
 }
 
@@ -185,3 +190,5 @@ DEFAULT_FROM_EMAIL = 'noreply@sublytic.com'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
