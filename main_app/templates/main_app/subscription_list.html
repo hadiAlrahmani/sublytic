@@ -9,7 +9,7 @@
           {% if subscription.predefined_subscription.image %}
             <img src="{{ subscription.predefined_subscription.image.url }}" alt="{{ subscription.predefined_subscription.name }}">
           {% else %}
-            <img src="/static/default_image.png" alt="Default Image"> <!-- Add a default image if no image exists -->
+            <img src="/static/default_image.png" alt="Default Image"> <!-- Default image if none exists -->
           {% endif %}
           <div class="card-body">
             <h5 class="card-title">{{ subscription.predefined_subscription.name }}</h5>
@@ -31,8 +31,5 @@
       <p>No subscriptions yet!</p>
     {% endfor %}
   </div>
-  <a href="{% url 'create_subscription' %}">Create New Subscription</a>
-  <hr>
-  <h3>Past Subscription Payments</h3>
-  <a href="{% url 'subscription_history' %}">View Payment History</a>
-{% endblock %}
+  <a href="/subscriptions/create/" class="create-subscription-btn">Create New Subscription</a>
+  {% endblock %}

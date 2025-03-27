@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Welcome to Sublytic</h2>
-<p>Manage your subscriptions with ease.</p>
-{% if user.is_authenticated %}
-    <a href="{% url 'subscription_list' %}">View Subscriptions</a>
-{% else %}
-    <a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a>
-{% endif %}
+<div class="home-container">
+    <div class="hero-section">
+        <h1>Welcome to Sublytic</h1>
+        <p class="hero-description">Easily manage your subscriptions and never miss a renewal again!</p>
+        <div class="cta-buttons">
+            {% if user.is_authenticated %}
+                <a href="{% url 'subscription_list' %}" class="btn btn-primary">View Subscriptions</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                <span>or</span>
+                <a href="{% url 'signup' %}" class="btn btn-secondary">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
