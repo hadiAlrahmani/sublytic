@@ -7,7 +7,28 @@ from django.utils import timezone
 import datetime
 
 def home(request):
-    return render(request, 'main_app/home.html')
+    # Get today's date and calculate the reminder range
+    today = timezone.now().date()
+    reminder_start_date = today  # Reminder starts today
+    reminder_end_date = today + timezone.timedelta(days=7)  # Ends in 7 days
+
+    # Check if the user is authenticated
+    if request.user.is_authenticated:
+        # Get the user's subscriptions that are within the reminder range
+        upcoming_renewals = Subscription.objects.filter(
+            user=request.user,
+            renewal_date__gte=reminder_start_date,
+            renewal_date__lte=reminder_end_date
+        ).order_by('renewal_date')
+    else:
+        upcoming_renewals = []
+
+    return render(request, 'main_app/home.html', {
+        'upcoming_renewals': upcoming_renewals,  # Pass upcoming renewals to the template
+        'today': today,
+        'reminder_start_date': reminder_start_date,
+        'reminder_end_date': reminder_end_date
+    })
 
 def signup(request):
     if request.method == 'POST':

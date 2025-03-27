@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Edit Subscription</h1>
-  <form method="POST" enctype="multipart/form-data">
+  <h1 class="edit-heading">Edit Subscription</h1>
+  <form method="POST" enctype="multipart/form-data" class="edit-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Update Subscription</button>
+    <button type="submit" class="update-btn">Update Subscription</button>
   </form>
 {% endblock %}

@@ -27,4 +27,15 @@
   <h3>Past Subscription Payments</h3>
   <a href="{% url 'subscription_history' %}">View Payment History</a>
 
+
+  @admin.register(SubscriptionPayment)
+class SubscriptionPaymentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'subscription', 'amount', 'payment_date')
+    search_fields = ('subscription__user__username', 'subscription__predefined_subscription__name')
+
+    from .models import Subscription, SubscriptionPayment, PredefinedSubscription
+
+    LOGIN_REDIRECT_URL = '/subscriptions/'
+
+    
      -->

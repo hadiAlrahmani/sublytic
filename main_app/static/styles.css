@@ -451,3 +451,291 @@ body {
         padding: 10px 20px;
     }
 }
+
+/* Edit and Delete Links Styling */
+.edit-delete a {
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+/* Edit Link */
+.edit-delete a:first-child {
+    background-color: #28a745;  /* Green color for Edit */
+    color: white;
+    border: 2px solid transparent;
+    transition: border 0.3s ease, transform 0.3s ease;
+}
+
+.edit-delete a:first-child:hover {
+    border: 2px solid #28a745;
+    transform: scale(1.1);
+}
+
+/* Delete Link */
+.edit-delete a:last-child {
+    background-color: #dc3545;  /* Red color for Delete */
+    color: white;
+    border: 2px solid transparent;
+    transition: border 0.3s ease, transform 0.3s ease;
+}
+
+.edit-delete a:last-child:hover {
+    border: 2px solid #dc3545;
+    transform: scale(1.1);
+}
+
+/* Card Footer Styling */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+/* Delete Button Styling */
+.delete-btn {
+    background-color: #dc3545; /* Red color */
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+    transform: scale(1.05);
+}
+
+.delete-btn:active {
+    background-color: #bd2130; /* Even darker red on click */
+    transform: scale(1);
+}
+
+/* Edit Subscription Page Styling */
+.edit-heading {
+    font-size: 2rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Form Styling */
+.edit-form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Form Fields Styling */
+.edit-form input,
+.edit-form select,
+.edit-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.edit-form input:focus,
+.edit-form select:focus,
+.edit-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Update Button Styling */
+.update-btn {
+    background-color: #007bff; /* Blue color */
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.update-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-5px); /* Slight lift effect */
+}
+
+.update-btn:active {
+    background-color: #003d7a; /* Even darker blue when clicked */
+    transform: translateY(0); /* Reset lift effect */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .edit-form {
+        padding: 20px;
+    }
+
+    .edit-heading {
+        font-size: 1.6rem;
+    }
+
+    .update-btn {
+        font-size: 1rem;
+    }
+}
+
+/* Home Container */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    margin: 0 auto;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure it spans the width */
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.cta-buttons a {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: white;
+    background-color: #007bff;
+}
+
+.cta-buttons a.btn-secondary {
+    background-color: #6c757d;
+}
+
+.cta-buttons a:hover {
+    background-color: #0056b3;
+}
+
+.cta-buttons span {
+    font-size: 1.1rem;
+    align-self: center;
+}
+
+/* Upcoming Renewals */
+.upcoming-renewals {
+    margin-top: 70px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.upcoming-renewals h2 {
+    font-size: 2.3rem;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #2d3436; /* Darker text color */
+}
+
+.renewal-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.renewal-card {
+    background: #f9f9f9; /* Light grey card background */
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    width: 280px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    padding-bottom: 20px;
+}
+
+.renewal-card:hover {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 25px;
+    text-align: center;
+}
+
+.subscription-title {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #2d3436; /* Dark text color */
+}
+
+.renewal-date {
+    color: #636e72;
+}
+
+.renewal-reminder {
+    background-color: #ffcccb; /* Light red for reminder */
+    padding: 6px;
+    border-radius: 5px;
+    color: #e74c3c; /* Red color */
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.card-footer {
+    background-color: #ecf0f1; /* Light grey footer */
+    padding: 15px;
+    text-align: center;
+    border-radius: 0 0 15px 15px;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #2d3436;
+}
+
+.no-renewals {
+    margin-top: 30px;
+    text-align: center;
+    color: #636e72;
+    font-size: 1.2rem;
+}
