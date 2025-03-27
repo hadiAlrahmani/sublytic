@@ -8,6 +8,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+# form that is tied to the modal
 class SubscriptionForm(forms.ModelForm):
     predefined_subscription = forms.ModelChoiceField(queryset=PredefinedSubscription.objects.all(), empty_label="Choose Subscription")
     renewal_date = forms.DateField(widget=forms.SelectDateWidget())
@@ -16,3 +17,4 @@ class SubscriptionForm(forms.ModelForm):
     class Meta:
         model = Subscription
         fields = ['predefined_subscription', 'renewal_date', 'auto_renew']
+        # Specifies the model that this form is based on & which fields should be included in the form

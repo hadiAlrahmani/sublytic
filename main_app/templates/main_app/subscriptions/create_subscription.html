@@ -3,12 +3,14 @@
 {% block content %}
   <h2>Select Your Subscription</h2>
   <div class="row">
+    {% comment %} each predefined subscription will be displayed with thier data. {% endcomment %}
     {% for subscription in predefined_subscriptions %}
       <div class="col-md-4">
         <div class="card subscription-card">
           {% if subscription.image %}
             <img src="{{ subscription.image.url }}" class="card-img-top" alt="{{ subscription.name }}">
           {% else %}
+          {% comment %} defult image if no image {% endcomment %}
             <img src="/static/default_image.png" class="card-img-top" alt="Default Image">
           {% endif %}
           <div class="card-body">
@@ -69,6 +71,7 @@
 
 {% block extra_js %}
   <script>
+    {% comment %} when user clicks "select subscription" event listener gets data, updates them  upon what the user select from subscriptions{% endcomment %}
     document.addEventListener("DOMContentLoaded", function () {
       const selectButtons = document.querySelectorAll('.select-subscription');
       const modal = new bootstrap.Modal(document.getElementById('selectSubscriptionModal'));

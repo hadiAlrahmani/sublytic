@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
-
+{% comment %} block that will be rendered {% endcomment %}
 {% block content %}
   <h2>Your Subscriptions</h2>
   <div class="row">
+      {% comment %} loopoing through the subscriptions {% endcomment %}
     {% for subscription in subscriptions %}
       <div class="col-md-4">
         <div class="card">
+          {% comment %} checking images and other cards details {% endcomment %}
           {% if subscription.predefined_subscription.image %}
             <img src="{{ subscription.predefined_subscription.image.url }}" alt="{{ subscription.predefined_subscription.name }}">
           {% else %}
             <img src="/static/default_image.png" alt="Default Image"> <!-- Default image if none exists -->
           {% endif %}
           <div class="card-body">
+            {% comment %} checks if its renewal date will show reminder message in the card. {% endcomment %}
             <h5 class="card-title">{{ subscription.predefined_subscription.name }}</h5>
             <p class="card-text">Renewal Date: {{ subscription.renewal_date }}</p>
             {% if reminder_start_date <= subscription.renewal_date and subscription.renewal_date <= reminder_end_date %}
@@ -19,6 +22,7 @@
             {% endif %}
           </div>
           <div class="card-footer">
+            {% comment %} Edit and Delete Subscription Links {% endcomment %}
             <div class="edit-delete">
               <a href="{% url 'edit_subscription' subscription.pk %}">Edit</a>
               <a href="{% url 'delete_subscription' subscription.pk %}">Delete</a>
