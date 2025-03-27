@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .models import Subscription, SubscriptionPayment, PredefinedSubscription  # Added PredefinedSubscription import
+from .models import Subscription, SubscriptionPayment, PredefinedSubscription 
 from .forms import SignUpForm, SubscriptionForm
 from django.utils import timezone
 import datetime
@@ -49,7 +49,6 @@ def create_subscription(request):
         predefined_subscription_id = request.POST.get('predefined_subscription')  # Get the subscription ID
 
         if not predefined_subscription_id:
-            # Handle error if no subscription ID was selected (optional)
             return redirect('create_subscription')  # Redirect to the create page if no ID
 
         # Retrieve the predefined subscription object

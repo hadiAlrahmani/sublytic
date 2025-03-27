@@ -37,16 +37,16 @@
         <div class="modal-body">
           <form method="POST" action="{% url 'create_subscription' %}">
             {% csrf_token %}
-            <input type="hidden" name="predefined_subscription" id="predefined_subscription"> <!-- Hidden input for subscription ID -->
+            <input type="hidden" name="predefined_subscription" id="predefined_subscription"> <!-- Input for subscription ID -->
             
             <div class="mb-3">
               <label for="selected_subscription_name" class="form-label">Subscription</label>
-              <span id="selected_subscription_name" class="form-control-plaintext"></span> <!-- Display subscription name here -->
+              <span id="selected_subscription_name" class="form-control-plaintext"></span>
             </div>
             
             <div class="mb-3">
               <label for="subscription_price" class="form-label">Price</label>
-              <span id="subscription_price" class="form-control-plaintext"></span> <!-- Display subscription price here -->
+              <span id="subscription_price" class="form-control-plaintext"></span> 
             </div>
             
             <div class="mb-3">
@@ -85,7 +85,6 @@
           document.getElementById('subscription_price').textContent = `${subscriptionPrice} BHD`;
           document.getElementById('predefined_subscription').value = subscriptionId;
           
-          // Show the modal
           modal.show();
         });
       });
